@@ -1,0 +1,284 @@
+* {
+	margin: 0 auto;
+	padding: 0;
+	border: none;
+	outline: none;
+	text-align: inherit;
+	background-color: transparent;
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	text-align: inherit;
+}
+
+@-ms-viewport { width: device-width; }
+
+ul, ol, li, div, form, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, label, input, select, textarea, blockquote, img, textarea, p { display: block; box-sizing: border-box; }
+
+ul, ol, li { list-style: none; }
+
+h1, h2, h3, h4, h5, h6, p { margin: 0 auto; }
+
+a { text-decoration: none; }
+
+b, strong { font-weight: 800; }
+
+i, em { font-style: italic; }
+
+img { margin: 0 auto; border: 0; }
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+
+a[href],
+button,
+button.fa,
+input[type=submit],
+input[type=radio],
+input[type=checkbox],
+select { cursor: pointer; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+html {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+body {
+	position: relative;
+    min-height: 100%;
+	text-align: center;
+	font-family: 'Josefin Sans', sans-serif;
+	font-weight: normal;
+	line-height: 1.4em;
+	color: white;
+	background: #111;
+}
+
+
+/* - - - - - - - - - - - - - - - -  Division - - - - - - - - - - - - - - - - */
+
+.division {
+	position: fixed;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	align-content: stretch;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+}
+
+.division .part {
+	flex: 1 1 auto;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: center;
+	width: 50%;
+	min-width: 300px;
+	padding: 20px 30px;
+	overflow: hidden;
+}
+.division .part.white {
+	align-items: flex-end;
+	text-align: right;
+	color: #111;
+	background: #eee;
+}
+.division .part.black {
+	align-items: flex-start;
+	text-align: left;
+	color: #eee;
+	background: #111;
+}
+
+.division .part.white > * { margin-right: 0; }
+.division .part.black > * { margin-left: 0; }
+
+
+/* - - - - - - - - - - - - - - - - Setup - - - - - - - - - - - - - - - - */
+
+form#setup {
+	z-index: 20;
+	transition: opacity 300ms linear;
+}
+form#setup.off {
+	pointer-events: none;
+	opacity: 0;
+}
+
+form#setup h3 {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+form#setup label {
+	margin-top: 10px;
+	font-size: 16px;
+}
+
+form#setup input {
+	width: 90%;
+	max-width: 400px;
+	padding: 5px 0;
+	font-weight: 300;
+	opacity: 0.8;
+	transition: opacity 200ms linear;
+}
+form#setup input.name {
+	font-size: 48px;
+	line-height: 64px;
+}
+form#setup input.time {
+	font-size: 64px;
+	line-height: 72px;
+}
+form#setup input.fail { color: #db2e2e; }
+form#setup input:hover,
+form#setup input:focus { opacity: 1; }
+
+form#setup button#submit {
+	position: absolute;
+	bottom: 30px; right: 40px;
+	padding: 5px 15px;
+	font-size: 24px;
+	line-height: 36px;
+	color: #111;
+	background: #eee;
+	transition: opacity 200ms linear;
+}
+form#setup button#submit:hover,
+form#setup button#submit:focus { opacity: 0.5; }
+
+
+/* - - - - - - - - - - - - - - - - Game - - - - - - - - - - - - - - - - */
+
+div#game {
+	z-index: 10;
+}
+
+div#game.paused .part.white {
+	color: #333;
+	background: #ccc;
+}
+div#game.paused .part.black {
+	color: #ccc;
+	background: #333;
+}
+
+div#game div.part > div.contrast {
+	box-sizing: content-box;
+	width: 200px;
+	height: 200px;
+	padding: 15px 20px 25px;
+	margin-bottom: 30px;
+	opacity: 0;
+	transition: opacity 100ms linear;
+}
+div#game div.part.white > div.contrast {
+	margin-right: -30px;
+	background: #111;
+}
+div#game div.part.black > div.contrast {
+	margin-left: -30px;
+	background: #eee;
+}
+div#game div.part.on > div.contrast { opacity: 1; }
+div#game.paused div.part > div.contrast { opacity: 0.5; }
+
+div#game div.part > div.contrast > div.icon {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: center no-repeat;
+	background-size: contain;
+}
+div#game div.part.white > div.contrast > div.icon { background-image: url('imgs/white.svg'); }
+div#game div.part.black > div.contrast > div.icon { background-image: url('imgs/black.svg'); }
+
+div#game div.part > span.name {
+	display: block;
+	width: 400px;
+	height: 40px;
+	font-size: 32px;
+	line-height: 40px;
+}
+
+div#game div.part > div.time {
+	display: block;
+	height: 140px;
+	font-size: 144px;
+	font-weight: 300;
+	line-height: 130px;
+}
+
+div#game div.part > div.percentage {
+	position: relative;
+	width: 100%;
+	max-width: 600px;
+	height: 6px;
+	margin: 15px 0;
+}
+div#game div.part.white > div.percentage { margin-right: -30px; }
+div#game div.part.black > div.percentage { margin-left: -30px; }
+
+div#game div.part > div.percentage > div.done {
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #6bc838;
+}
+div#game div.part.white > div.percentage > div.done { right: 0; }
+div#game div.part.black > div.percentage > div.done { left: 0; }
+div#game div.part > div.percentage > div.done.yellow { background-color: #dbd936; }
+div#game div.part > div.percentage > div.done.orange { background-color: #eba222; }
+div#game div.part > div.percentage > div.done.red { background-color: #db2e2e; }
+
+
+/* - - - - - - - - - - - - - - - - End - - - - - - - - - - - - - - - - */
+
+div#end {
+	display: none;
+	z-index: 30;
+	opacity: 0;
+	transition: opacity 300ms linear;
+}
+div#end.on { opacity: 1; }
+
+div#end > .part {
+	padding: 20px 0;
+	min-width: auto;
+	transition: width 500ms ease-out;
+}
+div#end.black > .part.white,
+div#end.white > .part.black { width: 0; }
+div#end.black > .part.black,
+div#end.white > .part.white { width: 100%; }
+
+div#end > .part .winner {
+	margin: 0 auto;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 1000ms linear;
+}
+div#end.black > .part .winner { color: white; }
+div#end.white > .part .winner { color: #111; }
+div#end > .part .winner.on { opacity: 1; }
+
+div#end > .part .winner > h2 {
+	font-size: 64px;
+	font-weight: 300;
+	line-height: 72px;
+}
+
+div#end > .part .winner > p {
+	margin-top: 10px;
+	font-size: 32px;
+	line-height: 36px;
+}
